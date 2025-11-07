@@ -14,6 +14,8 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -35,6 +37,13 @@ import org.springframework.format.annotation.DateTimeFormat;
  * @author daves
  */
 @Entity
+@Table(
+    name = "usuario",
+    uniqueConstraints = {
+        @UniqueConstraint(columnNames = {"email"}),
+        @UniqueConstraint(columnNames = {"login"})
+    }
+)
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Usuario.findAll", query = "SELECT u FROM Usuario u")
@@ -65,13 +74,13 @@ public class Usuario implements Serializable {
     @NotNull
     @NotBlank
     @Size(min = 1, max = 15)
-    @Column(nullable = false, length = 15)
+    @Column(nullable = false, length = 15, unique = true)
     private String login;
     // @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="E-mail inválido")//if the field contains email address consider using this annotation to enforce field validation
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 90)
-    @Column(nullable = false, length = 90)
+    @Column(nullable = false, length = 90, unique = true)
     private String email;
     @Basic(optional = false)
     @NotNull
