@@ -1,0 +1,39 @@
+version: "3.8"
+services:
+  # Maven build e run
+  maven:
+    image: maven:3.8.6-openjdk-11
+    container_name: calc-app
+    working_dir: /app
+    volumes:
+      - .:/app
+      - ~/.m2:/root/.m2
+      - maven-target:/app/target # Volume separado para target
+    ports:
+      - "9000:9000"
+    command: mvn spring-boot:run
+    networks:
+      - app-network
+    environment:
+      - SERVER_PORT=9000
+
+  # Selenium Chrome
+  chrome:
+    image: selenium/standalone-chrome:latest
+    container_name: selenium-chrome
+    ports:
+      - "4444:4444"
+      - "7900:7900"
+    shm_size: 2g
+    networks:
+      - app-network
+    environment:
+      - SE_NODE_MAX_SESSIONS=5
+      - SE_NODE_SESSION_TIMEOUT=300
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  maven-target:

@@ -1,8 +1,0 @@
-version: "3"
-services:
-  chrome:
-    image: selenium/standalone-chrome:latest # Imagem com Chrome + driver
-    ports:
-      - "4444:4444" # Porta do Selenium Grid
-      - "7900:7900" # Porta VNC (para você ver o teste rodando)
-    shm_size: 2g # Memória compartilhada (evita crash do Chrome)

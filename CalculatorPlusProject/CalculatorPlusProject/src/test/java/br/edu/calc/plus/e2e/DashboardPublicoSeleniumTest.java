@@ -35,15 +35,18 @@ public class DashboardPublicoSeleniumTest {
         String gridUrl = System.getProperty("selenium.remote.url",
                 System.getenv().getOrDefault("SELENIUM_REMOTE_URL", "http://localhost:4444/wd/hub"));
 
-        driver = new RemoteWebDriver(new URL(gridUrl), options);
+        // driver = new RemoteWebDriver(new URL(gridUrl), options);
+        driver = new RemoteWebDriver(new URL("http://chrome:4444"), options);
+
 
         // 6. Configura o tempo de espera
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
 
         // 7. Define a URL base acessível de dentro do container Docker
         // No Windows/macOS, o hostname especial para alcançar o host é 'host.docker.internal'
-        String hostForContainer = System.getProperty("app.host", System.getenv().getOrDefault("APP_HOST", "host.docker.internal"));
-        baseUrl = "http://" + hostForContainer + ":" + port + "/";
+        // String hostForContainer = System.getProperty("app.host", System.getenv().getOrDefault("APP_HOST", "host.docker.internal"));
+        // baseUrl = "http://" + hostForContainer + ":" + port + "/";
+        baseUrl = "http://maven:" + port + "/";
     }
 
     @AfterEach
