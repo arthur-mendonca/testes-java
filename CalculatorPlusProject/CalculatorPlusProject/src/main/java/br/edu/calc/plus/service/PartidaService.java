@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.edu.calc.plus.domain.Jogo;
+import org.springframework.data.domain.PageRequest;
 import br.edu.calc.plus.domain.Partida;
 import br.edu.calc.plus.domain.dto.JogoListDTO;
 import br.edu.calc.plus.domain.dto.RankingDTO;
@@ -143,9 +144,8 @@ public class PartidaService {
 		return p;
 	}
 
-	public List<RankingDTO> getRanking() {
-		
-		return pDao.getRanking();
-	}
+    public List<RankingDTO> getRanking() {
+        return pDao.getRanking(PageRequest.of(0, 20));
+    }
 
 }

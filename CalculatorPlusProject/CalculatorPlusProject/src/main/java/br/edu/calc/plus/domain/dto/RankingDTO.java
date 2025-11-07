@@ -12,14 +12,24 @@ import lombok.NoArgsConstructor;
 public class RankingDTO {
 
 	private Integer idUser;
-	
-	private String nome;
-	
-	private double bonusTotal;
-	
-	private long competicoes;
-	
-	private long tempoTotal;
-	
-}
 
+	private String nome;
+
+	private double bonusTotal;
+
+	private long competicoes;
+
+	private long tempoTotal;
+
+	public double getBonificacao() {
+		return bonusTotal;
+	}
+
+	public String getNome() {
+		if (nome == null) {
+			return null;
+		}
+		return nome;
+	}
+
+}

@@ -3,6 +3,7 @@ package br.edu.calc.plus.repo;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -26,9 +27,9 @@ public interface PartidaRepo extends JpaRepository<Partida, Integer>{
 	Partida findByIdAndUsuarioId(int idPergunta, Integer idUser);
 
 	
-	@Query("select new "+src+"RankingDTO(p.usuario.id, p.usuario.nome, sum(p.bonificacao) as tot, count(p), sum(p.tempo)) "
-			+ " from Partida p group by p.usuario.nome order by tot desc")
-	List<RankingDTO> getRanking();
+    @Query("select new "+src+"RankingDTO(p.usuario.id, p.usuario.nome, sum(p.bonificacao) as tot, count(p), sum(p.tempo)) "
+            + " from Partida p group by p.usuario.nome order by tot desc")
+    List<RankingDTO> getRanking(Pageable pageable);
 
    
     
