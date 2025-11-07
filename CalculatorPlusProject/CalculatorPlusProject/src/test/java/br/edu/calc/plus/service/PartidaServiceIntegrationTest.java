@@ -37,15 +37,11 @@ public class PartidaServiceIntegrationTest {
 
         // Arrange (Organizar)
         // Criamos um usuário real no banco DE TESTE
-        // Adapte 'new Usuario()' para como seu usuário é criado
-        // (ex: se tiver construtor, ou se precisar de UserDTO)
         usuarioDeTeste = new Usuario();
         usuarioDeTeste.setLogin("testeCti03");
         usuarioDeTeste.setEmail("testeCti03@teste.com");
         usuarioDeTeste.setNome("Teste CTI 03");
         usuarioDeTeste.setSenha("SenhaForte123");
-        // ATENÇÃO: Se você usa Spring Security, a senha precisa estar
-        // criptografada ou o 'save' pode falhar.
         usuarioDeTeste.setCidade("São Paulo");
         usuarioDeTeste.setDataNascimento(LocalDate.of(2000, 1, 1));
         usuarioRepo.save(usuarioDeTeste);

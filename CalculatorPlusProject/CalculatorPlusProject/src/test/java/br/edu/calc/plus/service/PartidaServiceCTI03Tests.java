@@ -13,7 +13,6 @@ import org.mockito.Mockito;
 import br.edu.calc.plus.repo.JogoRepo;
 import br.edu.calc.plus.repo.PartidaRepo;
 import br.edu.calc.plus.repo.UsuarioRepo;
-import br.edu.calc.plus.service.exception.CompeticaoDiariaJaRealizadaException;
 
 // RODAR ESTE TESTE
 // mvn -Dtest=PartidaServiceUnitTest test
