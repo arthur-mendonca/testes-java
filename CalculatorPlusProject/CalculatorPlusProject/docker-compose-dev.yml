@@ -8,28 +8,34 @@ services:
     volumes:
       - .:/app
       - ~/.m2:/root/.m2
-      # - maven-target:/app/target # Volume separado para target
+      - maven-target:/app/target # Volume separado para target
     ports:
       - "8090:9000" # Mapeia 9000 do container para 8090 do host
-    command: sh -lc "mvn -q -DskipTests compile && mvn -q spring-boot:run"
+    # command: sh -lc "mvn -q -DskipTests -Dspring-boot.run.profiles=prod spring-boot:run"
+    command: sh -lc "mvn -q -DskipTests -Dspring-boot.run.profiles=default spring-boot:run"
     networks:
       - app-network
     environment:
       - SERVER_PORT=9000
+      # Desativa SystemMetricsAutoConfiguration para evitar NPE em ProcessorMetrics
+      - SPRING_AUTOCONFIGURE_EXCLUDE=org.springframework.boot.actuate.autoconfigure.metrics.SystemMetricsAutoConfiguration,org.springframework.boot.actuate.autoconfigure.metrics.web.tomcat.TomcatMetricsAutoConfiguration
 
-  # Selenium Chrome
-  chrome:
-    image: selenium/standalone-chrome:latest
-    container_name: selenium-chrome
-    ports:
-      - "4445:4444"
-      - "7901:7900"
-    shm_size: 2g
+  # Serviço para rodar testes sob demanda
+  tests:
+    image: maven:3.8.6-openjdk-11
+    working_dir: /app
+    profiles:
+      - tests
+    volumes:
+      - .:/app
+      - ~/.m2:/root/.m2
+      - maven-target:/app/target
     networks:
       - app-network
     environment:
-      - SE_NODE_MAX_SESSIONS=5
-      - SE_NODE_SESSION_TIMEOUT=300
+      - SPRING_PROFILES_ACTIVE=test
+      - SPRING_AUTOCONFIGURE_EXCLUDE=org.springframework.boot.actuate.autoconfigure.metrics.SystemMetricsAutoConfiguration,org.springframework.boot.actuate.autoconfigure.metrics.web.tomcat.TomcatMetricsAutoConfiguration
+    command: sh -lc "mvn -q test"
 
 networks:
   app-network:

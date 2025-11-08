@@ -16,23 +16,8 @@
     
     <properties>
         <java.version>11</java.version>
-        <selenium.version>4.13.0</selenium.version>
     </properties>
     
-    <!-- Gerência de dependências (BOM) deve ficar no nível do projeto, fora de <dependencies> -->
-    <dependencyManagement>
-        <dependencies>
-            <!-- Importa o "Bill of Materials" (BOM) do Selenium -->
-            <dependency>
-                <groupId>org.seleniumhq.selenium</groupId>
-                <artifactId>selenium-bom</artifactId>
-                <version>${selenium.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
-
     <dependencies>
 
         <dependency>
@@ -103,25 +88,7 @@
             <artifactId>spring-security-test</artifactId>
             <scope>test</scope>
         </dependency>
-
-       <dependency>
-            <groupId>org.seleniumhq.selenium</groupId>
-            <artifactId>selenium-java</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>io.github.bonigarcia</groupId>
-            <artifactId>webdrivermanager</artifactId>
-            <version>5.8.0</version>
-            <scope>test</scope>
-        </dependency>
-        <!-- Necessário para o WebDriverManager 5.x -->
-         <dependency>
-            <groupId>org.apache.httpcomponents.client5</groupId>
-            <artifactId>httpclient5</artifactId>
-            <version>5.2.3</version>
-            <scope>test</scope>
-        </dependency>
+        
         
     </dependencies>
 
