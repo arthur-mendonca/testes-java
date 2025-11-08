@@ -5,6 +5,10 @@ services:
     environment:
       - SPRING_PROFILES_ACTIVE=prod
       - SERVER_PORT=9000
+      - SELENIUM_HOST=selenium
+      - SELENIUM_PORT=4444
+      - APP_HOST=app
+      - APP_PORT=9000
     ports:
       - "9000:9000"
     networks:

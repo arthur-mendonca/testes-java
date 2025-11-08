@@ -31,22 +31,20 @@ public class DashboardPublicoSeleniumTest {
         options.addArguments("--window-size=1920,1080");
         options.addArguments("--remote-allow-origins=*");
 
-        // URL do Selenium Grid (container)
-        String gridUrl = System.getProperty("selenium.remote.url",
-                System.getenv().getOrDefault("SELENIUM_REMOTE_URL", "http://localhost:4444/wd/hub"));
+        // URL do Selenium Grid usando propriedades configuráveis
+        String seleniumHost = System.getProperty("selenium.host", "chrome");
+        int seleniumPort = Integer.parseInt(System.getProperty("selenium.port", "4444"));
+        String seleniumUrl = String.format("http://%s:%d", seleniumHost, seleniumPort);
+        
+        driver = new RemoteWebDriver(new URL(seleniumUrl), options);
 
-        // driver = new RemoteWebDriver(new URL(gridUrl), options);
-        driver = new RemoteWebDriver(new URL("http://chrome:4444"), options);
-
-
-        // 6. Configura o tempo de espera
+        // Configura o tempo de espera
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
 
-        // 7. Define a URL base acessível de dentro do container Docker
-        // No Windows/macOS, o hostname especial para alcançar o host é 'host.docker.internal'
-        // String hostForContainer = System.getProperty("app.host", System.getenv().getOrDefault("APP_HOST", "host.docker.internal"));
-        // baseUrl = "http://" + hostForContainer + ":" + port + "/";
-        baseUrl = "http://maven:" + port + "/";
+        // Define a URL base usando propriedades configuráveis
+        String appHost = System.getProperty("app.host", "maven");
+        String appPort = System.getProperty("app.port", String.valueOf(port));
+        baseUrl = String.format("http://%s:%s/", appHost, appPort);
     }
 
     @AfterEach
