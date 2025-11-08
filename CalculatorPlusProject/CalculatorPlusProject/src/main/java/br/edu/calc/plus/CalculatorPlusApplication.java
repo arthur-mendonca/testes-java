@@ -27,6 +27,11 @@ public class CalculatorPlusApplication {
         SpringApplication.run(CalculatorPlusApplication.class, args);
     }
 
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+
     @Autowired
     private UsuarioRepo uDao;
 
