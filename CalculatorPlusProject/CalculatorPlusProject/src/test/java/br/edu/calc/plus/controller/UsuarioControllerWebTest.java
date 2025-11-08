@@ -49,6 +49,7 @@ public class UsuarioControllerWebTest {
         when(restTemplateBuilder.build()).thenReturn(new RestTemplate());
     }
 
+    // Confere que GET /user retorna a página de cadastro.
     @Test
     @DisplayName("GET /user deve retornar a view de cadastro")
     void getUser_deveRetornarCadastro() throws Exception {
@@ -57,6 +58,7 @@ public class UsuarioControllerWebTest {
                 .andExpect(view().name("cadastro"));
     }
 
+    // Testa cadastro válido: codifica senha, salva usuário e redireciona para /home.
     @Test
     @DisplayName("POST /user válido deve redirecionar para /home")
     void postUser_valido_deveRedirecionarHome() throws Exception {
@@ -75,6 +77,7 @@ public class UsuarioControllerWebTest {
         verify(usuarioService, times(1)).save(any());
     }
 
+    // Testa cadastro inválido: mantém na view de cadastro sem redirecionar.
     @Test
     @DisplayName("POST /user inválido deve retornar a própria view de cadastro")
     void postUser_invalido_deveRetornarCadastro() throws Exception {

@@ -22,6 +22,7 @@ public class UsuarioRepoIntegrationTest {
         return new Usuario(null, nome, login, login+"@mail.com", "Abcdef1@", "Cidade", LocalDate.of(1990, 1, 1));
     }
 
+    // Confere que findByNome e findByLogin localizam o usuário persistido.
     @Test
     @DisplayName("findByNome e findByLogin devem localizar usuário cadastrado")
     void findByNomeELgin_deveFuncionar() {

@@ -55,6 +55,7 @@ public class HomeControllerWebTest {
         when(restTemplateBuilder.build()).thenReturn(new RestTemplate());
     }
 
+    // Verifica que GET /home popula métricas no modelo e retorna a view 'home'.
     @Test
     @DisplayName("GET /home deve popular métricas e retornar view home")
     void getHome_devePopularMetricas() throws Exception {

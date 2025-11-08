@@ -59,6 +59,7 @@ class CompeticaoControllerWebTests {
     @MockBean
     private RestTemplateBuilder restTemplateBuilder;
 
+    // Verifica que GET /competicao/new redireciona quando usuário já competiu hoje.
     @Test
     @DisplayName("Controller: bloqueia nova competição quando já competiu hoje")
     void deveBloquearQuandoJaCompetiuHoje() throws Exception {
@@ -71,13 +72,19 @@ class CompeticaoControllerWebTests {
                 .andExpect(flash().attributeExists("success"));
     }
 
-    // Principal fake para satisfazer layout com expressão #authentication.getPrincipal().nome
     static class UsuarioPrincipalFake {
         private final String nome;
-        UsuarioPrincipalFake(String nome) { this.nome = nome; }
-        public String getNome() { return nome; }
+
+        UsuarioPrincipalFake(String nome) {
+            this.nome = nome;
+        }
+
+        public String getNome() {
+            return nome;
+        }
     }
 
+    // Valida que /competicao/{id}/detalhe exibe 'detalheJogo' com a partida no modelo quando encontrada.
     @Test
     @DisplayName("Controller: detalhe exibe view 'detalheJogo' com partida no modelo")
     void deveExibirDetalhePartidaQuandoEncontrada() throws Exception {
@@ -102,6 +109,7 @@ class CompeticaoControllerWebTests {
                 .andExpect(model().attributeExists("partida"));
     }
 
+    // Garante que detalhe redireciona com erro quando partida não existe/lança exceção.
     @Test
     @DisplayName("Controller: detalhe redireciona com erro quando partida não encontrada")
     void deveRedirecionarQuandoPartidaNaoEncontrada() throws Exception {

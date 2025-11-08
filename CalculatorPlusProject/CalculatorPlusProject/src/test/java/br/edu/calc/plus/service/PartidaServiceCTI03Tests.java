@@ -47,6 +47,7 @@ class PartidaServiceUnitTest {
         f.set(target, value);
     }
 
+    // Simula usuário que já competiu hoje e espera retorno true da regra.
     @Test
     @DisplayName("CTI-03 (RF-04): Deve identificar que o usuário já competiu hoje")
     void userJaCompetiuHoje_DeveRetornarTrue_QuandoUsuarioJaCompetiuHoje() {

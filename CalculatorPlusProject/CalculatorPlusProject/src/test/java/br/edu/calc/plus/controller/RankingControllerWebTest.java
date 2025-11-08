@@ -38,7 +38,7 @@ public class RankingControllerWebTest {
     private PartidaService partidaService;
 
     @MockBean
-    private LogadoUtil logadoUtil; // apenas para satisfazer injeção
+    private LogadoUtil logadoUtil;
 
     @MockBean
     private UserDetailsServiceImpl userDetailsService;
@@ -54,10 +54,12 @@ public class RankingControllerWebTest {
         when(restTemplateBuilder.build()).thenReturn(new RestTemplate());
     }
 
+    // Verifica que GET /ranking popula lista de RankingDTO e retorna a view 'ranking'.
     @Test
     @DisplayName("GET /ranking deve popular modelo e retornar a view")
     void getRanking_deveRetornarView() throws Exception {
-        List<RankingDTO> lista = List.of(RankingDTO.builder().idUser(1).nome("User-1").bonusTotal(10).competicoes(1).tempoTotal(50).build());
+        List<RankingDTO> lista = List
+                .of(RankingDTO.builder().idUser(1).nome("User-1").bonusTotal(10).competicoes(1).tempoTotal(50).build());
         when(partidaService.getRanking()).thenReturn(lista);
 
         UserLogado principal = new UserLogado(
@@ -66,8 +68,7 @@ public class RankingControllerWebTest {
                 "user1@mail.com",
                 "user",
                 "SenhaValida123",
-                java.util.Set.of(new SimpleGrantedAuthority("ROLE_CLIENTE"))
-        );
+                java.util.Set.of(new SimpleGrantedAuthority("ROLE_CLIENTE")));
 
         mockMvc.perform(get("/ranking").with(user(principal)))
                 .andExpect(status().isOk())

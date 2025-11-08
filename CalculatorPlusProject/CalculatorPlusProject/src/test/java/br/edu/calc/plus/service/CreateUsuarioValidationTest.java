@@ -9,7 +9,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
@@ -51,10 +50,10 @@ class CreateUsuarioValidationTest {
     @BeforeEach
     void setUp() {
         // Limpa o repositório ANTES de cada teste
-        // (O @Transactional já faz isso, mas é uma garantia extra)
         usuarioRepo.deleteAll();
     }
 
+    // Teste de integração: salva usuário válido único e confirma persistência.
     @Test
     @DisplayName("CTI-04 (RF-02): Deve cadastrar usuário com sucesso (dados válidos e únicos)")
     void deveCadastrarUsuarioComSucesso() {
@@ -63,14 +62,13 @@ class CreateUsuarioValidationTest {
         UserDTO dtoValido = criarDtoValido("usuario.sucesso@teste.com", "loginSucesso");
 
         // Act
-        // 2. Tenta salvar. O assertDoesNotThrow confirma "sem exceções" [cite: `Plano
-        // de testes.pdf`].
+        // 2. Tenta salvar. O assertDoesNotThrow confirma "sem exceções"
         Assertions.assertDoesNotThrow(() -> {
             usuarioService.save(dtoValido);
         }, "O cadastro falhou com uma exceção inesperada (ex: DataIntegrityViolation).");
 
         // Assert
-        // 3. Verifica se foi "persistido no banco" [cite: `Plano de testes.pdf`].
+        // 3. Verifica se foi "persistido no banco"
         Usuario usuarioSalvo = usuarioRepo.findByLogin("loginSucesso").orElse(null);
 
         Assertions.assertNotNull(usuarioSalvo, "O usuário não foi encontrado no banco após o save.");

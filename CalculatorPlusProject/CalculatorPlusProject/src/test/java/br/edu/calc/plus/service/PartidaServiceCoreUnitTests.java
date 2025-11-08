@@ -49,6 +49,7 @@ class PartidaServiceCoreUnitTests {
         f.set(target, value);
     }
 
+    // Testa savePartida: acerto aumenta bonificação e persiste Jogo/Partida.
     @Test
     @DisplayName("savePartida: adiciona bônus quando resposta correta e persiste Jogo/Partida")
     void savePartida_deveAdicionarBonusQuandoCorreto() throws Exception {
@@ -68,6 +69,7 @@ class PartidaServiceCoreUnitTests {
         verify(pDao, times(1)).save(p);
     }
 
+    // Testa savePartida: erro reduz bonificação pela metade e persiste Jogo/Partida.
     @Test
     @DisplayName("savePartida: reduz bônus pela metade quando resposta errada e persiste Jogo/Partida")
     void savePartida_deveReduzirBonusQuandoErrado() throws Exception {
@@ -87,6 +89,7 @@ class PartidaServiceCoreUnitTests {
         verify(pDao, times(1)).save(p);
     }
 
+    // Testa FinalizaPartida: calcula tempo e dobra bônus no acerto perfeito.
     @Test
     @DisplayName("FinalizaPartida: calcula tempo e dobra bonificação para acerto perfeito")
     void finalizaPartida_deveCalcularTempoEDobrarBonusQuandoPerfeito() throws Exception {
@@ -111,6 +114,7 @@ class PartidaServiceCoreUnitTests {
         verify(pDao, times(1)).save(p);
     }
 
+    // Testa getPartida: retorna partida e inicializa jogoList para evitar lazy.
     @Test
     @DisplayName("getPartida: retorna partida e acessa jogoList para evitar lazy")
     void getPartida_deveRetornarEInicializarLista() throws Exception {

@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 
 public class RankingDTOTest {
 
+    // Confere que getBonificacao retorna o campo bonusTotal.
     @Test
     @DisplayName("getBonificacao deve retornar bonusTotal")
     void getBonificacao_deveRetornarBonusTotal() {
@@ -21,6 +22,7 @@ public class RankingDTOTest {
         assertEquals(123.45, dto.getBonificacao());
     }
 
+    // Confere que getNome retorna nome e lida com null sem erro.
     @Test
     @DisplayName("getNome deve retornar nome e suportar null")
     void getNome_deveRetornarNome() {

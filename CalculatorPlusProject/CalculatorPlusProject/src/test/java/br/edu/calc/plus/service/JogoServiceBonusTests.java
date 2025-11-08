@@ -42,6 +42,7 @@ class JogoServiceBonusTests {
         return (double) metodoBonusOperacao.invoke(jogoService, operador);
     }
 
+    // Valida cálculo de bônus para divisão: base 1.00 vira 1.90.
     @Test
     @DisplayName("CTU-01 (RF-05): calcular bônus de DIVISAO = 1.90 para base 1.00")
     void calcularBonusDivisaoRetornaUmPontoNoventa() throws Exception {
@@ -54,6 +55,7 @@ class JogoServiceBonusTests {
         assertEquals(1.90, resultado, 0.0001);
     }
 
+    // Verifica bônus percentual de multiplicação (50%).
     @Test
     @DisplayName("CTU-01.1 (RF-05): Deve calcular bônus de 50% para MULTIPLICACAO")
     void deveCalcularBonusMultiplicacao() throws Exception {
@@ -69,6 +71,7 @@ class JogoServiceBonusTests {
                 "O cálculo do bônus de multiplicação (50%) está incorreto.");
     }
 
+    // Verifica bônus percentual de subtração (20%).
     @Test
     @DisplayName("CTU-01.2 (RF-05): Deve calcular bônus de 20% para SUBTRACAO")
     void deveCalcularBonusSubtracao() throws Exception {
@@ -84,6 +87,7 @@ class JogoServiceBonusTests {
                 "O cálculo do bônus de subtração (20%) está incorreto.");
     }
 
+    // Verifica bônus percentual de adição (10%).
     @Test
     @DisplayName("CTU-01.3 (RF-05): Deve calcular bônus de 10% para ADICAO")
     void deveCalcularBonusAdicao() throws Exception {
@@ -102,6 +106,7 @@ class JogoServiceBonusTests {
     /**
      * CTU-04 (RF-05): Validar proteção contra Divisão por Zero.
      **/
+    // Assegura que criarJogosAleatorio não lança ArithmeticException (divisão por zero).
     @Test
     @DisplayName("CTU-04 (RF-05): Não deve lançar DivisaoPorZero (ArithmeticException)")
     void criarJogosAleatorio_NaoDeveLancarExcecaoDivisaoPorZero() {

@@ -39,7 +39,6 @@ class RankingIntegrationTest {
     @Autowired
     private PartidaRepo partidaRepo;
 
-    // Helper para criar usuário
     private Usuario criarUsuario(String apelido, String email) {
         Usuario user = new Usuario();
         user.setNome(apelido);
@@ -48,10 +47,9 @@ class RankingIntegrationTest {
         user.setSenha("SenhaForte123");
         user.setCidade("Cidade Teste");
         user.setDataNascimento(LocalDate.of(2000, 1, 1));
-        return usuarioRepo.save(user); // Salva e retorna o usuário com ID
+        return usuarioRepo.save(user);
     }
 
-    // Helper para criar uma partida para um usuário
     private void criarPartida(Usuario user, double bonificacao) {
         Partida p = new Partida(null, LocalDateTime.now(), bonificacao, 0);
         p.setUsuario(user);
@@ -60,52 +58,33 @@ class RankingIntegrationTest {
 
     @BeforeEach
     void setUp() {
-        // Limpa o banco (ordem correta por causa da Foreign Key)
         partidaRepo.deleteAll();
         usuarioRepo.deleteAll();
     }
 
-    // =================================================================
-    // ESTE É O TESTE CTI-05 QUE VOCÊ PEDIU
-    // =================================================================
+    // Integração: testa se o ranking retorna os 20 usuários com maior bônus total
     @Test
     @DisplayName("CTI-05 (RF-06): Deve retornar o Top 20 ordenado por bônus total")
     void deveRetornarTop20OrdenadoCorretamente() {
 
-        // 1. Arrange: Inserir 25 usuários com pontuações variadas [cite:
-        // `plano_de_testes_sucinto.md`]
+        // 1. Arrange: Inserir 25 usuários com pontuações variadas
         for (int i = 1; i <= 25; i++) {
             Usuario user = criarUsuario("User-" + i, "user" + i + "@teste.com");
 
-            // Damos a eles bônus decrescentes
-            // User-1 ganha 100
-            // User-2 ganha 99
-            // ...
-            // User-25 ganha 76
             double bonus = 101 - i;
-
-            // Para User-1 (bonus=100), cria 2 partidas de 50
             if (i == 1) {
                 criarPartida(user, 50.0);
                 criarPartida(user, 50.0);
             } else {
-                // Para os outros, cria 1 partida com o bônus total
                 criarPartida(user, bonus);
             }
         }
 
-        // 2. Act: Chamar o método do ranking [cite: `plano_de_testes_sucinto.md`]
         List<RankingDTO> ranking = partidaService.getRanking();
 
-        // 3. Assert: Validar os resultados esperados [cite:
-        // `plano_de_testes_sucinto.md`]
-
-        // 3.1. Deve retornar exatamente o Top 20 (a query no PartidaRepo [cite:
-        // `uploaded:src/main/java/br/edu/calc/plus/repo/PartidaRepo.java`] usa
-        // PageRequest(0, 20))
         Assertions.assertEquals(20, ranking.size(), "O ranking não retornou o Top 20.");
 
-        // 3.2. Deve estar ordenada decrescentemente (Validamos o primeiro e o último)
+        // 3.2. Deve estar ordenada decrescentemente
         RankingDTO primeiroLugar = ranking.get(0);
         RankingDTO vigesimoLugar = ranking.get(19);
 

@@ -27,6 +27,7 @@ public class PartidaRepoIntegrationTest {
         return new Usuario(null, nome, login, login+"@mail.com", "Abcdef1@", "Cidade", LocalDate.of(1990, 1, 1));
     }
 
+    // Valida buscas por usuário: lista por usuário e busca específica por id+usuario.
     @Test
     @DisplayName("findByUsuarioId deve listar partidas do usuário e findByIdAndUsuarioId deve localizar a partida específica")
     void repositorioPartida_buscasPorUsuario() {

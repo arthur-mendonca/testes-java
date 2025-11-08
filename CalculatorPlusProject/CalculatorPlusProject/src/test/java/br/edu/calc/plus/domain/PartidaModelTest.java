@@ -13,6 +13,7 @@ import br.edu.calc.plus.util.Util;
 
 public class PartidaModelTest {
 
+    // Conta acertos/erros com uma lista de jogos corretos e incorretos.
     @Test
     @DisplayName("getAcertos/getErros devem refletir jogos corretos e incorretos")
     void partida_contagemAcertosErros() {
@@ -30,6 +31,7 @@ public class PartidaModelTest {
         assertEquals(1, p.getErros());
     }
 
+    // Valida formatação da data da partida conforme utilitário.
     @Test
     @DisplayName("getDataFormatada deve usar padrão dd/MM/yyyy hh:mm:ss")
     void partida_formatacaoData() {
@@ -39,6 +41,7 @@ public class PartidaModelTest {
         assertEquals(Util.formatarData(data), p.getDataFormatada());
     }
 
+    // Valida formatação monetária da bonificação da partida.
     @Test
     @DisplayName("getBonificacaoFormatada deve usar padrão monetário de Util")
     void partida_formatacaoBonificacao() {

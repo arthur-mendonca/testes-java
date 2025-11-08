@@ -19,6 +19,7 @@ public class UsuarioModelTest {
         return u;
     }
 
+    // Verifica que senha forte atende aos requisitos e é aceita.
     @Test
     @DisplayName("senhaValida deve aceitar senha forte com requisitos mínimos")
     void senhaValida_deveAceitarSenhaForte() {
@@ -26,6 +27,7 @@ public class UsuarioModelTest {
         assertTrue(u.senhaValida());
     }
 
+    // Garante falha para senha com tamanho abaixo do mínimo.
     @Test
     @DisplayName("senhaValida deve falhar para senha muito curta")
     void senhaValida_deveFalharSenhaCurta() {
@@ -33,6 +35,7 @@ public class UsuarioModelTest {
         assertFalse(u.senhaValida());
     }
 
+    // Garante falha quando falta letra maiúscula.
     @Test
     @DisplayName("senhaValida deve falhar quando faltar letra maiúscula")
     void senhaValida_deveFalharSemMaiuscula() {
@@ -40,6 +43,7 @@ public class UsuarioModelTest {
         assertFalse(u.senhaValida());
     }
 
+    // Garante falha quando falta dígito numérico.
     @Test
     @DisplayName("senhaValida deve falhar quando faltar dígito")
     void senhaValida_deveFalharSemDigito() {
@@ -47,6 +51,7 @@ public class UsuarioModelTest {
         assertFalse(u.senhaValida());
     }
 
+    // Garante falha quando falta caractere especial.
     @Test
     @DisplayName("senhaValida deve falhar quando faltar caractere especial")
     void senhaValida_deveFalharSemEspecial() {
@@ -54,6 +59,7 @@ public class UsuarioModelTest {
         assertFalse(u.senhaValida());
     }
 
+    // Valida que logins no intervalo [6,15] sem espaços são aceitos.
     @Test
     @DisplayName("loginValida deve aceitar logins entre 6 e 15 caracteres sem espaço")
     void loginValida_deveAceitarIntervalo() {
@@ -61,6 +67,7 @@ public class UsuarioModelTest {
         assertTrue(novoUsuarioComLogin("abcdefghijklmno").loginValida());
     }
 
+    // Verifica rejeição para login curto, longo ou contendo espaços.
     @Test
     @DisplayName("loginValida deve falhar para login curto, longo ou com espaço")
     void loginValida_deveFalharCasosInvalidos() {

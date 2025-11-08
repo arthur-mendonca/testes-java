@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 
 public class JogoListDTOTest {
 
+    // Valida que getDataFormatada formata a data no padrão esperado.
     @Test
     @DisplayName("getDataFormatada deve formatar data em dd/MM/yyyy hh:mm:ss")
     void getDataFormatada_deveFormatarCorretamente() {

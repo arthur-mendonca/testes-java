@@ -22,16 +22,16 @@ public class PartidaServiceIntegrationTest {
     private PartidaService partidaService;
 
     @Autowired
-    private UsuarioRepo usuarioRepo; // Usado para criar o usuário de teste
+    private UsuarioRepo usuarioRepo;
 
     @Autowired
-    private PartidaRepo partidaRepo; // Usado para limpar, se necessário
+    private PartidaRepo partidaRepo;
 
     private Usuario usuarioDeTeste;
 
     @BeforeEach
     void setUp() {
-        // Limpa o banco (garantido pelo @Transactional, mas é boa prática)
+        // Limpa o banco
         partidaRepo.deleteAll();
         usuarioRepo.deleteAll();
 
@@ -47,6 +47,7 @@ public class PartidaServiceIntegrationTest {
         usuarioRepo.save(usuarioDeTeste);
     }
 
+    // Integração: testa se o segundo jogo no mesmo dia será bloqueado pelo serviço
     @Test
     @DisplayName("CTI-03 (RF-04): Deve bloquear segunda competição no dia (Teste de BD)")
     void deveBloquearSegundaCompeticaoNoDia() throws Exception {

@@ -42,6 +42,7 @@ class UserDTOValidationTest {
         return dto;
     }
 
+    // Validação: senha com menos de 8 caracteres deve gerar violação @Size.
     @Test
     @DisplayName("CTU-02 (RNF-04): Deve falhar (retornar violação) para senha CURTA (< 8)")
     void deveFalharParaSenhaCurta() {
@@ -61,6 +62,7 @@ class UserDTOValidationTest {
         Assertions.assertEquals("A senha deve ter entre 8 e 16 caracteres", mensagem);
     }
 
+    // Validação: senha com mais de 16 caracteres deve gerar violação @Size.
     @Test
     @DisplayName("CTU-02.1 (RNF-04): Deve falhar (retornar violação) para senha LONGA (> 16)")
     void deveFalharParaSenhaLonga() {
@@ -77,6 +79,7 @@ class UserDTOValidationTest {
         Assertions.assertEquals("A senha deve ter entre 8 e 16 caracteres", mensagem);
     }
 
+    // Validação: senha em branco deve gerar violações @NotBlank e @Size.
     @Test
     @DisplayName("CTU-02.2 (RNF-04): Deve falhar (retornar violação) para senha EM BRANCO")
     void deveFalharParaSenhaEmBranco() {
@@ -99,9 +102,7 @@ class UserDTOValidationTest {
         Assertions.assertTrue(mensagens.contains("A senha deve ter entre 8 e 16 caracteres"));
     }
 
-    // =================================================================
-    // TESTE CTU-03 (SENHA FORTE = TAMANHO OK)
-    // =================================================================
+    // Validação: senha no intervalo permitido não deve gerar violações.
     @Test
     @DisplayName("CTU-03 (RNF-04): Deve passar (0 violações) para senha com tamanho válido")
     void devePassarParaSenhaComTamanhoValido() {

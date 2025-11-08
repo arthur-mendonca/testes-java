@@ -31,6 +31,7 @@ public class JogoRepoIntegrationTest {
         return new Usuario(null, nome, login, login+"@mail.com", "Abcdef1@", "Cidade", LocalDate.of(1990, 1, 1));
     }
 
+    // Garante que consultas de acertos/erros refletem jogos corretos e incorretos persistidos.
     @Test
     @DisplayName("getAllAcertos e getAllErros devem refletir jogos corretos e incorretos")
     void repoJogo_contagensAcertosErros() {

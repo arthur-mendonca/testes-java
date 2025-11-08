@@ -54,9 +54,8 @@ class UsuarioServiceDuplicateEmailTest {
         usuarioRepo.deleteAll();
     }
 
-    // =================================================================
-    // ESTE É O TESTE CTI-01 QUE VOCÊ PEDIU
-    // =================================================================
+    // Teste de integração: salvar email duplicado deve lançar
+    // DataIntegrityViolationException.
     @Test
     @DisplayName("CTI-01 (RF-02): Deve lançar DataIntegrityViolationException ao salvar EMAIL duplicado")
     void deveLancarExcecaoAoSalvarEmailDuplicado() {
@@ -75,9 +74,8 @@ class UsuarioServiceDuplicateEmailTest {
         }, "Deveria ter lançado DataIntegrityViolationException por email duplicado.");
     }
 
-    // =================================================================
-    // ESTE É O TESTE CTI-02 (BÔNUS, MESMA LÓGICA)
-    // =================================================================
+    // Teste de integração: salvar login duplicado deve lançar
+    // DataIntegrityViolationException.
     @Test
     @DisplayName("CTI-02 (RF-02): Deve lançar DataIntegrityViolationException ao salvar LOGIN duplicado")
     void deveLancarExcecaoAoSalvarLoginDuplicado() {
@@ -90,7 +88,7 @@ class UsuarioServiceDuplicateEmailTest {
         UserDTO dto2 = criarDtoValido("email.unico2@teste.com", "loginDuplicado");
 
         // Act & Assert
-        // Espera que o service.save() quebre com a exceção do banco (p. 6)
+        // Espera que o service.save() quebre com a exceção do banco
         Assertions.assertThrows(DataIntegrityViolationException.class, () -> {
             usuarioService.save(dto2);
         }, "Deveria ter lançado DataIntegrityViolationException por login duplicado.");

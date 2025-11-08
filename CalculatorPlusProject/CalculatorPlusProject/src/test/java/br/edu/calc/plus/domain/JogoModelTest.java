@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 
 public class JogoModelTest {
 
+    // Verifica que 'estaCerto/isCorrect' retornam true quando a resposta é correta.
     @Test
     @DisplayName("estaCerto deve retornar true quando resposta == resultado")
     void jogo_estaCerto_true() {
@@ -15,6 +16,7 @@ public class JogoModelTest {
         assertTrue(j.isCorrect());
     }
 
+    // Verifica que 'estaCerto/isCorrect' retornam false quando a resposta é incorreta.
     @Test
     @DisplayName("estaCerto deve retornar false quando resposta != resultado")
     void jogo_estaCerto_false() {
