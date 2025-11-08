@@ -100,7 +100,7 @@ class UserDTOValidationTest {
     }
 
     // =================================================================
-    // ESTE É O TESTE CTU-03 (SENHA FORTE = TAMANHO OK)
+    // TESTE CTU-03 (SENHA FORTE = TAMANHO OK)
     // =================================================================
     @Test
     @DisplayName("CTU-03 (RNF-04): Deve passar (0 violações) para senha com tamanho válido")

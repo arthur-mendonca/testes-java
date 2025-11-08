@@ -8,10 +8,10 @@ services:
     volumes:
       - .:/app
       - ~/.m2:/root/.m2
-      - maven-target:/app/target # Volume separado para target
+      # - maven-target:/app/target # Volume separado para target
     ports:
       - "9000:9000"
-    command: mvn spring-boot:run
+    command: sh -lc "mvn -q -DskipTests compile && mvn -q spring-boot:run"
     networks:
       - app-network
     environment:
